@@ -1,23 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Route, Routes } from "react-router-dom";
+
+import "./index.scss";
+import Home from "./pages/Home";
+import StartScreen from "./pages/StartScreen";
+import UserPage from "./pages/UserPage";
+
 
 function App() {
+  const [startScreen, setStartScreen] = React.useState(true);
+
+  React.useEffect(() => {
+    let timer = setTimeout(() => {
+      setStartScreen(false);
+      return () => {
+        clearTimeout(timer)
+      }
+    },2000)
+  },[])
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+     
+  
+    <Routes>
+      <Route path="/" element={startScreen? <StartScreen/>:<Home/>}/>
+      <Route path="/users/:id" element={<UserPage/>} />
+      <Route path="*" element={<div>Not found</div>} />
+
+    </Routes>
     </div>
   );
 }
