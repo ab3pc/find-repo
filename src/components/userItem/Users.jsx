@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchUsers, setCategory } from '../../store/usersSlice';
+import { fetchUsers, setCategory, setCurrentPage } from '../../store/usersSlice';
 import Pagination from '../pagination/Pagination';
 import UserItem from './UserItem';
 
@@ -14,6 +14,7 @@ const Users = ({input}) => {
 				'repositories': {sort:'repositories', order: 'desc'},
 			}
 
+		dispatch(setCurrentPage(1));
 		dispatch(setCategory(e.target.value));
 		dispatch(fetchUsers({ inputValue: input, ...sortObj[e.target.value]}));
 	}
@@ -22,7 +23,8 @@ const Users = ({input}) => {
 	  <>
 	  
 	  <ul className="users__list">
-		{users.length === 0 ? '' : <div className='sort'>Sort by: 
+		{users.length === 0 ? '' : <div className='sort'>
+			<div>Sort by: </div> 
 				<select className='sort_by' name="category" defaultValue={category} onChange={handleCategory}>
 					<option value={'followers'}>rating</option>
 					<option value={'joined'}>oldest</option>

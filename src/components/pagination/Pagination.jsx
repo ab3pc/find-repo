@@ -1,14 +1,14 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUsers, setCurrentPage } from "../../store/usersSlice";
+import { ITEMS_PER_PAGE } from "../../utilites/variables";
 import PaginationButton from "./PaginationButton";
 
 const Pagination = ({ input }) => {
-  const total_count = useSelector((state) => state.usersSlice.total_count);
-  const currentPage = useSelector((state) => state.usersSlice.currentPage);
-
-  const maxPages = Math.floor(total_count / 12) > 83 ? 83: Math.floor(total_count / 12);
+  const { total_count, currentPage } = useSelector((state) => state.usersSlice);
   const dispatch = useDispatch();
+  const maxPages =
+    Math.floor(total_count / ITEMS_PER_PAGE) > Math.floor(1000 / ITEMS_PER_PAGE) ? Math.floor(1000 / ITEMS_PER_PAGE) : Math.floor(total_count / ITEMS_PER_PAGE);
 
   const handleToStart = () => {
     dispatch(setCurrentPage(1));
@@ -16,12 +16,10 @@ const Pagination = ({ input }) => {
   };
 
   const handleNext = (currentPag) => {
-    console.log(input, currentPag);
-    dispatch(setCurrentPage(currentPag));
+     dispatch(setCurrentPage(currentPag));
     dispatch(fetchUsers({ inputValue: input, currentPages: currentPag }));
   };
   const handlePrev = (currentPag) => {
-    console.log(input, currentPag);
     dispatch(setCurrentPage(currentPag));
     dispatch(fetchUsers({ inputValue: input, currentPages: currentPag }));
   };

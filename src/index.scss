@@ -74,6 +74,12 @@ body {
 	&:hover {
 		transform: scale(1.02);
 	}
+	& svg {
+		margin-right: 5px;
+		vertical-align: middle;
+		width: 30px;
+		height: 30px;
+	}
 }
 
 
@@ -97,6 +103,8 @@ body {
 	}
 }
 .sort {
+	display: flex;
+	align-items: center;
 	margin-right: 10px;
 	font-size: 16px;
 	text-align: left;
@@ -104,6 +112,36 @@ body {
 	position: absolute;
 	left: 175px;
 	top: 15px;
+	& div {
+		width: 100px;
+	}
+}
+.sort select {
+    display: block;
+    width: 100%; /* от ширины блока div */
+    padding: .5rem;/* отступы от текста до рамки */
+    background: none; /* убираем фон */
+    border: 1px solid #ccc; /* рамка */
+    border-radius: 3px;/* скругление полей формы */
+    -webkit-appearance: none;/* Chrome */
+    -moz-appearance: none;/* Firefox */
+    appearance: none;/* убираем дефолнтные стрелочки */
+    font-family: inherit;/* наследует от родителя */
+    font-size: 1rem;
+    color: #444;
+}
+.sort:after {
+    content: "";
+    display: block;
+    border-style: solid;
+    border-width: 6px 5px 0 5px;
+    border-color: #000 transparent transparent transparent;
+    pointer-events: none;
+    position: absolute;
+    top: 50%;
+    right: 1rem;
+    z-index: 1;
+    margin-top: -3px;
 }
 
 .btn__search {
@@ -127,7 +165,7 @@ body {
 }
 
 .users__list {
-	padding: 40px;
+	padding: 60px 40px;
 	display: flex;
 	justify-content: center;
 	flex-wrap: wrap;
@@ -385,4 +423,14 @@ body {
 	.pagination__item {
 		margin-right: 8px;
 	}
+}
+@media (max-width:430px) {
+	
+	.sort {
+		left: 90px;
+	}
+	.title__userpage {
+		font-size: 20px;
+	}
+	
 }
